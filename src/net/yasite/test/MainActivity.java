@@ -70,7 +70,7 @@ public class MainActivity extends BaseNewActivity {
 		@Override
 		public void doTask(Message msg) throws Exception {
 			// TODO Auto-generated method stub
-			pModel.RequestPost("dfadafdsgadsgagd");
+			pModel.RequestPost("12451515793759817595");
 			socerListEntity = socerModel.RequestSocerList();
 		}
 

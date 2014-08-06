@@ -27,6 +27,7 @@ public abstract class BaseAPI implements HttpAPI {
 	private int status;
 	private String paramStr;
 	private List <NameValuePair> valuePair;
+	private List <NameValuePair> fileList;
 	private int statuesCode;
 	public SharedPreferences prefs;
 	HttpResponse res;
@@ -45,6 +46,15 @@ public abstract class BaseAPI implements HttpAPI {
 
 	public void setStatuesCode(int statuesCode) {
 		this.statuesCode = statuesCode;
+	}
+	
+
+	public List<NameValuePair> getFileList() {
+		return fileList;
+	}
+
+	public void setFileList(List<NameValuePair> fileList) {
+		this.fileList = fileList;
 	}
 
 	private BaseAPI() {
@@ -84,6 +94,12 @@ public abstract class BaseAPI implements HttpAPI {
 	public BaseAPI(Context context,List <NameValuePair> pm) {
 		this.context = context;
 		this.valuePair = pm;
+	} 
+	public BaseAPI(Context context,List <NameValuePair> pm,
+			List <NameValuePair> fileList) {
+		this.context = context;
+		this.valuePair = pm;
+		this.fileList = fileList;
 	} 
 	
 	public BaseAPI(Context context,List <NameValuePair> pm,BaseHttpParam params) {

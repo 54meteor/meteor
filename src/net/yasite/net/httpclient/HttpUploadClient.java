@@ -1,6 +1,7 @@
 package net.yasite.net.httpclient;
 
 import java.io.File;
+import java.nio.charset.Charset;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -8,8 +9,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 
@@ -37,8 +40,23 @@ public class HttpUploadClient extends HttpPostClent {
 		try {
 			HttpContext httpContext = new BasicHttpContext();
 			MultipartEntity multipartContent = new MultipartEntity();
-			HttpParam pm = (HttpParam) param.getRequestParam();
-			multipartContent.addPart("avatar", new FileBody(new File(pm.getFilePath())));
+			//处理非文件类提交
+			for(int i = 0; i < param.getValuePair().size(); i++){
+				if(param.getValuePair().get(i) != null){
+					multipartContent.addPart(
+							param.getFileList().get(i).getName(),
+							new StringBody(param.getValuePair().get(i).getValue(),  
+									Charset.forName(HTTP.UTF_8)));
+				}
+			}
+			//处理文件类提交
+			for(int i = 0; i < param.getFileList().size(); i++){
+				if(param.getFileList().get(i) != null){
+					multipartContent.addPart(
+							param.getFileList().get(i).getName(),
+							new FileBody(new File(param.getFileList().get(i).getValue())));
+				}
+			}
 			
 			((HttpPost)request).setEntity(multipartContent);
 			response = httpClient.execute(request, httpContext);
