@@ -4,5 +4,14 @@
     <string name="app_name">test</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    
+    
+    <string name="xlistview_header_hint_normal">下拉可以刷新</string>
+    <string name="xlistview_header_hint_ready">松开获取最新</string>
+    <string name="xlistview_header_hint_loading">努力加载中</string>
+    <string name="xlistview_header_last_time">最近更新：</string>
+    <string name="xlistview_footer_hint_normal">加载更多</string>
+    <string name="xlistview_footer_hint_notdata">已无更多信息</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
 
 </resources>

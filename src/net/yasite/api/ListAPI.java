@@ -24,5 +24,4 @@ public class ListAPI extends BaseAPI {
 		// TODO Auto-generated method stub
 		return new Gson().fromJson(json.toString(), NewsListEntity.class);
 	}
-
 }
