@@ -3,7 +3,6 @@ package net.yasite.api;
 import java.util.List;
 
 import net.yasite.api.params.BaseHttpParam;
-import net.yasite.net.HttpClientHelp;
 import net.yasite.net.HttpConstant;
 import net.yasite.net.httpclient.AHttpClient;
 import net.yasite.net.httpclient.HttpGetClient;

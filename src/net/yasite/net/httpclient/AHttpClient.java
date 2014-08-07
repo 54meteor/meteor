@@ -3,7 +3,6 @@ package net.yasite.net.httpclient;
 import java.security.KeyStore;
 
 import net.yasite.api.BaseAPI;
-import net.yasite.net.HttpClientHelp;
 import net.yasite.net.HttpConstant;
 import net.yasite.net.SSLSocketFactoryEx;
 
