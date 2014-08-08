@@ -170,7 +170,7 @@ public abstract class BaseAPI implements HttpAPI {
 		// 进行json解析
 		JSONObject json = null;
 		if(response != null){
-			if(response.toString().substring(0, 1).equals("[")){
+			if(response.toString().startsWith("[")){
 				json = new JSONObject();
 				json.put("list", new JSONArray(response.toString()));
 			}else if(response.toString().startsWith("<html>")){
@@ -276,11 +276,11 @@ public abstract class BaseAPI implements HttpAPI {
 	}
 	public void saveToken(String nameValuePairs){
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		prefs.edit().putString("token", nameValuePairs).commit();
+		prefs.edit().putString(BaseApplication.TOKEN, nameValuePairs).commit();
 		
 	}
 	public String getToken(){
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		return prefs.getString("token", "");
+		return prefs.getString(BaseApplication.TOKEN, "");
 	}
 }
