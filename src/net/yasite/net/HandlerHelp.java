@@ -37,11 +37,11 @@ public abstract class HandlerHelp {
 	RequestThread t = new RequestThread();
 	public boolean execute(boolean checkNetwork) {
 		 // 检查网络情况
-		boolean check = false;
         if(checkNetwork && ActivityUtil.isNetworkAvailable(context)){
-            check = true;
+            t.setNetStatus(true);
+        }else{
+        		t.setNetStatus(false);
         }
-        t.setNetStatus(check);
         t.start();
         return true;
 	}
