@@ -8,6 +8,7 @@ import net.yasite.net.httpclient.AHttpClient;
 import net.yasite.net.httpclient.HttpGetClient;
 import net.yasite.net.httpclient.HttpPostClent;
 import net.yasite.net.httpclient.HttpUploadClient;
+import net.yasite.test.BaseApplication;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -154,7 +155,9 @@ public abstract class BaseAPI implements HttpAPI {
 			return false;
 		}
 		// 请求参数验证
-		System.out.println("请求参数:" +  getMethod());
+		if(BaseApplication.DEBUG){
+			System.out.println("请求参数:" +  getMethod());
+		}
 		if ("post".equals(requestMode)) {
 			httpClient = new HttpPostClent(this);
 		} else if("get".equals(requestMode)){
@@ -176,7 +179,9 @@ public abstract class BaseAPI implements HttpAPI {
 			}else{
 				json = new JSONObject(response.toString());
 			}
-			System.out.println("返回结果:" + json.toString());
+			if(BaseApplication.DEBUG){
+				System.out.println("返回结果:" + json.toString());
+			}
 			setHandleResult(handlerResult(json));
 			return true;
 		}
