@@ -26,10 +26,11 @@ public abstract class BaseAPI implements HttpAPI {
 	public Context context;
 	private int status;
 	private String paramStr;
-	private List <NameValuePair> valuePair;
-	private List <NameValuePair> fileList;
+	private List <NameValuePair> valuePair;//post请求数据
+	private List <NameValuePair> fileList;//文件上传数据
 	private int statuesCode;
-	public SharedPreferences prefs;
+	private SharedPreferences prefs;
+	JSONObject json = new JSONObject();
 	HttpResponse res;
 	AHttpClient httpClient;
 	public HttpResponse getRes() {
@@ -108,49 +109,22 @@ public abstract class BaseAPI implements HttpAPI {
 		this.requestParam = params;
 	}
 
-	/**
-	 * 执行http put请求 返回结果封装在handleResult.
-	 * 
-	 * @return 成功返回ture,失败返回false
-	 * @throws Exception
-	 * @throws LalaHttpException 
-	 */
 	public boolean doUpload() throws Exception {
-		return doRequest("uplod");
+		httpClient = new HttpUploadClient(this);
+		return doRequest();
 	}
 
-	/**
-	 * 执行http post请求 返回结果封装在handleResult.
-	 * 
-	 * @return 成功返回ture,失败返回false
-	 * @throws Exception
-	 * @throws LalaHttpException 
-	 */
 	public boolean doPost() throws Exception {
-		return doPost(false);
+		httpClient = new HttpPostClent(this);
+		return doRequest();
 	}
 
-	/**
-	 * 执行http post请求 返回结果封装在handleResult.
-	 * 
-	 * @param converter
-	 *            是否需要数据转换 可扩展用
-	 * @return 成功返回ture,失败返回false
-	 * @throws Exception
-	 * @throws LalaHttpException 
-	 */
-	public boolean doPost(boolean converter) throws Exception {
-		return doRequest("post");
-
-	}
 	public boolean doGet() throws Exception {
-        return doGet(false);
+		httpClient = new HttpGetClient(this);
+        return doRequest();
     }
-	public boolean doGet(boolean converter) throws Exception {
-        return doRequest("get");
-    }
-	private boolean doRequest(String requestMode) throws Exception{
-		if (this.method == null) {
+	private boolean doRequest() throws Exception{
+		if (method == null) {
 			Log.e(HttpConstant.DUG_TYPE_ERROR, "未设置请求方法");
 			return false;
 		}
@@ -158,23 +132,12 @@ public abstract class BaseAPI implements HttpAPI {
 		if(BaseApplication.DEBUG){
 			System.out.println("请求参数:" +  getMethod());
 		}
-		if ("post".equals(requestMode)) {
-			httpClient = new HttpPostClent(this);
-		} else if("get".equals(requestMode)){
-			httpClient = new HttpGetClient(this);
-		}else if ("uplod".equals(requestMode)) {
-			httpClient = new HttpUploadClient(this);
-		}
 		httpClient.doRequest(this);
-		// 请求成功后,处理返回结果
-		// 进行json解析
-		JSONObject json = null;
+		
 		if(response != null){
 			if(response.toString().startsWith("[")){
-				json = new JSONObject();
 				json.put("list", new JSONArray(response.toString()));
 			}else if(response.toString().startsWith("<html>")){
-				json = new JSONObject();
 				json.put("content", response.toString());
 			}else{
 				json = new JSONObject(response.toString());
@@ -282,5 +245,13 @@ public abstract class BaseAPI implements HttpAPI {
 	public String getToken(){
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
 		return prefs.getString(BaseApplication.TOKEN, "");
+	}
+
+	public SharedPreferences getPrefs() {
+		return prefs;
+	}
+
+	public void setPrefs(SharedPreferences prefs) {
+		this.prefs = prefs;
 	}
 }
