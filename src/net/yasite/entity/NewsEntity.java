@@ -7,6 +7,7 @@ public class NewsEntity implements Serializable {
 	private String id;
 	private String title;
 	private String desc;
+	private String pic;
 	public String getId() {
 		return id;
 	}
@@ -24,6 +25,12 @@ public class NewsEntity implements Serializable {
 	}
 	public void setDesc(String desc) {
 		this.desc = desc;
+	}
+	public String getPic() {
+		return pic;
+	}
+	public void setPic(String pic) {
+		this.pic = pic;
 	}
 	
 }

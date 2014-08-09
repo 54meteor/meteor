@@ -1,5 +1,6 @@
 package net.yasite.test;
 
+import android.R.mipmap;
 import android.annotation.TargetApi;
 import android.app.Application;
 import android.content.Context;
@@ -20,7 +21,8 @@ public class BaseApplication extends Application{
      * application of the image loader.
      */
 //    private static ImageLoader imageManager;
-    
+    public static final boolean DEBUG = true;
+    public static final String TOKEN = "token";
 	@Override
 	public void onCreate(){
 		try{

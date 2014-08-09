@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.yasite.entity.NewsEntity;
+import net.yasite.test.BaseApplication;
 import net.yasite.test.R;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +15,15 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 public class NewsListAdapter extends BaseAdapter {
 	List<NewsEntity> list;
 	Context context;
 	
+	private ImageLoader mImageLoader;
+	private DisplayImageOptions options;
 	
 	public List<NewsEntity> getList() {
 		return list;
@@ -27,6 +34,15 @@ public class NewsListAdapter extends BaseAdapter {
 	public NewsListAdapter(Context context){
 		this.context = context;
 		list = new ArrayList<NewsEntity>();
+		mImageLoader = BaseApplication.initImageLoader(context);
+		options = new DisplayImageOptions.Builder()
+		.bitmapConfig(Bitmap.Config.RGB_565)
+		.showStubImage(R.drawable.ic_launcher)
+        .showImageForEmptyUri(R.drawable.ic_launcher)
+        .showImageOnFail(R.drawable.ic_launcher)
+		.cacheInMemory(true)
+		.cacheOnDisc(true)
+		.build();
 	}
 	@Override
 	public int getCount() {
@@ -65,18 +81,26 @@ public class NewsListAdapter extends BaseAdapter {
 		mViewHolder.nid.setText(item.getId());
 		mViewHolder.title.setText(item.getTitle());
 		mViewHolder.desc.setText(item.getDesc());
+		if(item.getPic() != null && !item.getPic().equals("")){
+			mImageLoader.displayImage("http://172.17.68.224:80/api/pic/" + item.getPic(),
+					mViewHolder.pic, options);
+		}else{
+			mImageLoader.displayImage("drawable://" + R.drawable.ic_launcher, mViewHolder.pic);
+		}
 		
 	}
 	private void setupChildViews(View convertView, ViewHolder mViewHolder){
 		mViewHolder.nid = (TextView)convertView.findViewById(R.id.nid);
 		mViewHolder.title = (TextView)convertView.findViewById(R.id.title);
 		mViewHolder.desc = (TextView)convertView.findViewById(R.id.desc);
+		mViewHolder.pic = (ImageView)convertView.findViewById(R.id.pic);
 	}
 	
 	static class ViewHolder{
 		private TextView nid;
 		private TextView title;
 		private TextView desc;
+		private ImageView pic;
 	}
 
 }

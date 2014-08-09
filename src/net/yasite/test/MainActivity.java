@@ -111,6 +111,8 @@ public class MainActivity extends BaseNewActivity implements OnXListViewListener
 	}
 
 	
+
+	
 	
 //	class SocerListHandler extends HandlerHelp{
 //
