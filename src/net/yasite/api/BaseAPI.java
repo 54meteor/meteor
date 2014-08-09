@@ -8,6 +8,7 @@ import net.yasite.net.httpclient.AHttpClient;
 import net.yasite.net.httpclient.HttpGetClient;
 import net.yasite.net.httpclient.HttpPostClent;
 import net.yasite.net.httpclient.HttpUploadClient;
+import net.yasite.test.BaseApplication;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -154,7 +155,9 @@ public abstract class BaseAPI implements HttpAPI {
 			return false;
 		}
 		// 请求参数验证
-		System.out.println("请求参数:" +  getMethod());
+		if(BaseApplication.DEBUG){
+			System.out.println("请求参数:" +  getMethod());
+		}
 		if ("post".equals(requestMode)) {
 			httpClient = new HttpPostClent(this);
 		} else if("get".equals(requestMode)){
@@ -167,7 +170,7 @@ public abstract class BaseAPI implements HttpAPI {
 		// 进行json解析
 		JSONObject json = null;
 		if(response != null){
-			if(response.toString().substring(0, 1).equals("[")){
+			if(response.toString().startsWith("[")){
 				json = new JSONObject();
 				json.put("list", new JSONArray(response.toString()));
 			}else if(response.toString().startsWith("<html>")){
@@ -176,7 +179,9 @@ public abstract class BaseAPI implements HttpAPI {
 			}else{
 				json = new JSONObject(response.toString());
 			}
-			System.out.println("返回结果:" + json.toString());
+			if(BaseApplication.DEBUG){
+				System.out.println("返回结果:" + json.toString());
+			}
 			setHandleResult(handlerResult(json));
 			return true;
 		}
@@ -271,11 +276,11 @@ public abstract class BaseAPI implements HttpAPI {
 	}
 	public void saveToken(String nameValuePairs){
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		prefs.edit().putString("token", nameValuePairs).commit();
+		prefs.edit().putString(BaseApplication.TOKEN, nameValuePairs).commit();
 		
 	}
 	public String getToken(){
 		prefs = PreferenceManager.getDefaultSharedPreferences(context);
-		return prefs.getString("token", "");
+		return prefs.getString(BaseApplication.TOKEN, "");
 	}
 }
