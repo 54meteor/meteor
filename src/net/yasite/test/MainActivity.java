@@ -6,6 +6,7 @@ import net.yasite.entity.SocerListEntity;
 import net.yasite.model.NewsModel;
 import net.yasite.model.PostTmpModel;
 import net.yasite.model.SocerModel;
+import net.yasite.model.UploadModel;
 import net.yasite.net.HandlerHelp;
 import net.yasite.view.XListView;
 import net.yasite.view.XListView.OnXListViewListener;
@@ -79,28 +80,30 @@ public class MainActivity extends BaseNewActivity implements OnXListViewListener
 
 		@Override
 		public void updateUI() {
-			listView.stopRefresh();
-			listView.stopLoadMore();
-			if(newsListEntity != null){
-				if(newsListEntity.getAlist() != null 
-						&& newsListEntity.getAlist().size() > 0){
-					if(pageNumber == 1){
-						adapter.setList(newsListEntity.getAlist());
-					}else{
-						adapter.getList().addAll(newsListEntity.getAlist());
-					}
-					pageNumber++;
-					adapter.notifyDataSetChanged();
-					if(newsListEntity.getPage().equals(newsListEntity.getTotalPage())){
-						listView.setPullLoadEnable(XListView.FOOTER_RETAIN);
-					}
-				}
-			}
+//			listView.stopRefresh();
+//			listView.stopLoadMore();
+//			if(newsListEntity != null){
+//				if(newsListEntity.getAlist() != null 
+//						&& newsListEntity.getAlist().size() > 0){
+//					if(pageNumber == 1){
+//						adapter.setList(newsListEntity.getAlist());
+//					}else{
+//						adapter.getList().addAll(newsListEntity.getAlist());
+//					}
+//					pageNumber++;
+//					adapter.notifyDataSetChanged();
+//					if(newsListEntity.getPage().equals(newsListEntity.getTotalPage())){
+//						listView.setPullLoadEnable(XListView.FOOTER_RETAIN);
+//					}
+//				}
+//			}
 		}
 
 		@Override
 		public void doTask(Message msg) throws Exception {
-			newsListEntity = newsModel.RequestList(page);
+//			newsListEntity = newsModel.RequestList(page);
+			UploadModel model = new UploadModel(context);
+			model.RequestUpload("a", "b");
 		}
 
 		@Override

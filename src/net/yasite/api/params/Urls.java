@@ -15,6 +15,8 @@ public class Urls {
 	
 	public final static String postTmp = "posttmp.php";
 	
+	public final static String upload = "upload.php";
+	
 }
 
 

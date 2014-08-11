@@ -43,7 +43,7 @@ public class HttpUploadClient extends HttpPostClent {
 		for(int i = 0; i < param.getValuePair().size(); i++){
 			if(param.getValuePair().get(i) != null){
 				multipartContent.addPart(
-						param.getFileList().get(i).getName(),
+						param.getValuePair().get(i).getName(),
 						new StringBody(param.getValuePair().get(i).getValue(),  
 								Charset.forName(HTTP.UTF_8)));
 			}
