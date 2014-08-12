@@ -83,7 +83,6 @@ public class BaseService {
 			if (daoSession.getDatabase() != null && daoSession.getDatabase().isOpen()) {
 				daoSession.getDatabase().close();
 			}
-			// daoSession.clear();
 		}
 		DaoMaster.clear();
 	}
