@@ -1,11 +1,13 @@
 package net.yasite.service;
 
+import java.util.List;
+
 import net.yasite.api.BaseAPI;
 import net.yasite.api.ListAPI;
 import net.yasite.api.params.ListParams;
-import net.yasite.dao.UserDao;
+import net.yasite.dao.NewsDao;
+import net.yasite.entity.NewsEntity;
 import net.yasite.entity.NewsListEntity;
-import net.yasite.entity.UserEntity;
 import android.content.Context;
 
 public class NewsService extends BaseService {
@@ -23,6 +25,13 @@ public class NewsService extends BaseService {
 		try {
 			if(api.doGet()){
 				newsListEntity = (NewsListEntity)api.getHandleResult();
+				if(newsListEntity != null 
+						&& newsListEntity.getAlist() != null){
+					if(page.equals("1")){
+						((NewsDao)getDao(NewsEntity.class)).deleteAll();
+					}
+					((NewsDao)getDao(NewsEntity.class)).insertInTx(newsListEntity.getAlist());
+				}
 				return newsListEntity;
 			}
 		} catch (Exception e) {
@@ -30,6 +39,10 @@ public class NewsService extends BaseService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public List<NewsEntity> getDaoList() {
+		return ((NewsDao)getDao(NewsEntity.class)).getAllList();
 	}
 
 }

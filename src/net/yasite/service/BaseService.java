@@ -16,6 +16,7 @@ import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 
+import de.greenrobot.dao.AbstractDao;
 import de.greenrobot.dao.identityscope.IdentityScopeType;
 
 public class BaseService {
@@ -51,6 +52,10 @@ public class BaseService {
 	
 	public NameValuePair getValue(String key,String value){
 		return new BasicNameValuePair(key, value);
+	}
+	
+	public AbstractDao getDao(Class entity){
+		return openSession().getDao(entity);
 	}
 	
 	protected BaseService(Context context) {

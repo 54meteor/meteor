@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class NewsEntity implements Serializable {
 
+	private Long _id;
 	private String id;
 	private String title;
 	private String desc;
@@ -31,6 +32,12 @@ public class NewsEntity implements Serializable {
 	}
 	public void setPic(String pic) {
 		this.pic = pic;
+	}
+	public Long get_id() {
+		return _id;
+	}
+	public void set_id(Long _id) {
+		this._id = _id;
 	}
 	
 }

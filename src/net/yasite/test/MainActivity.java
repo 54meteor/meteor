@@ -58,7 +58,8 @@ public class MainActivity extends BaseNewActivity implements OnXListViewListener
 		//实例化model，修改组件属性，判定控件，启动获取数据的线程
 		newsModel = new NewsModel(context);
 		socerModel = new SocerModel(context);
-		adapter = new NewsListAdapter(context);
+		
+		adapter = new NewsListAdapter(context,newsModel.getList());
 		listView.setAdapter(adapter);
 		pModel = new PostTmpModel(context);
 		listView.refresh(this);
@@ -80,30 +81,30 @@ public class MainActivity extends BaseNewActivity implements OnXListViewListener
 
 		@Override
 		public void updateUI() {
-//			listView.stopRefresh();
-//			listView.stopLoadMore();
-//			if(newsListEntity != null){
-//				if(newsListEntity.getAlist() != null 
-//						&& newsListEntity.getAlist().size() > 0){
-//					if(pageNumber == 1){
-//						adapter.setList(newsListEntity.getAlist());
-//					}else{
-//						adapter.getList().addAll(newsListEntity.getAlist());
-//					}
-//					pageNumber++;
-//					adapter.notifyDataSetChanged();
-//					if(newsListEntity.getPage().equals(newsListEntity.getTotalPage())){
-//						listView.setPullLoadEnable(XListView.FOOTER_RETAIN);
-//					}
-//				}
-//			}
+			listView.stopRefresh();
+			listView.stopLoadMore();
+			if(newsListEntity != null){
+				if(newsListEntity.getAlist() != null 
+						&& newsListEntity.getAlist().size() > 0){
+					if(pageNumber == 1){
+						adapter.setList(newsListEntity.getAlist());
+					}else{
+						adapter.getList().addAll(newsListEntity.getAlist());
+					}
+					pageNumber++;
+					adapter.notifyDataSetChanged();
+					if(newsListEntity.getPage().equals(newsListEntity.getTotalPage())){
+						listView.setPullLoadEnable(XListView.FOOTER_RETAIN);
+					}
+				}
+			}
 		}
 
 		@Override
 		public void doTask(Message msg) throws Exception {
-//			newsListEntity = newsModel.RequestList(page);
-			UploadModel model = new UploadModel(context);
-			model.RequestUpload("a", "b");
+			newsListEntity = newsModel.RequestList(page);
+//			UploadModel model = new UploadModel(context);
+//			model.RequestUpload("a", "b");
 		}
 
 		@Override

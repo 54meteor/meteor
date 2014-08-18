@@ -31,9 +31,9 @@ public class NewsListAdapter extends BaseAdapter {
 	public void setList(List<NewsEntity> list) {
 		this.list = list;
 	}
-	public NewsListAdapter(Context context){
+	public NewsListAdapter(Context context,List<NewsEntity> list){
 		this.context = context;
-		list = new ArrayList<NewsEntity>();
+		this.list = list;
 		mImageLoader = BaseApplication.initImageLoader(context);
 		options = new DisplayImageOptions.Builder()
 		.bitmapConfig(Bitmap.Config.RGB_565)
