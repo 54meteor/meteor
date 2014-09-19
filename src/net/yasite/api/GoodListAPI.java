@@ -1,10 +1,8 @@
 package net.yasite.api;
 
-import java.util.List;
 
 import net.yasite.api.params.GoodListParams;
 import net.yasite.api.params.Urls;
-import net.yasite.entity.GoodEntity;
 import net.yasite.entity.GoodListEntity;
 
 import org.json.JSONException;
