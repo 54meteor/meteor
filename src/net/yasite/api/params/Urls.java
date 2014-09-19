@@ -3,12 +3,15 @@ package net.yasite.api.params;
 public class Urls {
 
 	public final static String PROTOCOL = "http";
-	public final static String HOST = "172.17.68.224";
+	public final static String HOST = "172.17.68.244";
 	public final static String PORT = "80";
 	
 	public final static String WEB_SERVER_PATH = PROTOCOL + "://" + HOST + ":" + PORT;
 	
 	public final static String API = "/api/";
+	
+	public final static String EC = "/ecshop/api/";
+	
 	public final static String list = "list.php"; 
 	
 	public final static String socerList = "socerList.php";
@@ -16,6 +19,9 @@ public class Urls {
 	public final static String postTmp = "posttmp.php";
 	
 	public final static String upload = "upload.php";
+	
+	public final static String goodsList = "goodList.php";
+	
 	
 }
 

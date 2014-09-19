@@ -15,10 +15,6 @@ public class HttpConstant {
 
     public static final int MAX_TIMEOUT = 60 * 1000;
 
-	public final static String CTYPE = "2";
-	public final static String VERSION = "1.0";
-	public final static String ACCOUNTTYPE = "2";
-	
 	public static final String DUG_TYPE_INFO = "INFO";
 	public static final String DUG_TYPE_ERROR = "ERROR";
 

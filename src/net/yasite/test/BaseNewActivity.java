@@ -63,7 +63,7 @@ public abstract class BaseNewActivity extends FragmentActivity implements Activi
 	protected void onResume() {
 		super.onResume();
 	}
-	public Button getButton(int id) {
+	protected Button getButton(int id) {
 		return (Button) findViewById(id);
 	}
 	@Override
@@ -71,19 +71,19 @@ public abstract class BaseNewActivity extends FragmentActivity implements Activi
 		super.onPause();
 	}
 
-	public ImageButton getImageButton(int id) {
+	protected ImageButton getImageButton(int id) {
 		return (ImageButton) findViewById(id);
 	}
 
-	public EditText getEdit(int id) {
+	protected EditText getEdit(int id) {
 		return (EditText) findViewById(id);
 	}
 
-	public TextView getTextView(int id) {
+	protected TextView getTextView(int id) {
 		return (TextView) findViewById(id);
 	}
 
-	public ListView getListView(int id) {
+	protected ListView getListView(int id) {
 		return (ListView) findViewById(id);
 	}
 
@@ -139,13 +139,6 @@ public abstract class BaseNewActivity extends FragmentActivity implements Activi
 			
 		}
 	}
-//	public void run(View v){
-//		switch(v.getId()){
-//		case R.id.returnIbt:
-//			onBackPressed();
-//			break;
-//		}
-//	}
 	public void pbShow(ProgressBar pb){
 		if(pb != null){
 			pb.setVisibility(View.VISIBLE);

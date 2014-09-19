@@ -40,7 +40,7 @@ public abstract class HandlerHelp {
         if(checkNetwork && ActivityUtil.isNetworkAvailable(context)){
             t.setNetStatus(true);
         }else{
-        		t.setNetStatus(false);
+        	t.setNetStatus(false);
         }
         t.start();
         return true;

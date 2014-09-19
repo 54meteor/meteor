@@ -1,8 +1,11 @@
 package net.yasite.test;
 
+import net.yasite.adapter.GoodListAdapter;
 import net.yasite.adapter.NewsListAdapter;
+import net.yasite.entity.GoodListEntity;
 import net.yasite.entity.NewsListEntity;
 import net.yasite.entity.SocerListEntity;
+import net.yasite.model.GoodModel;
 import net.yasite.model.NewsModel;
 import net.yasite.model.PostTmpModel;
 import net.yasite.model.SocerModel;
@@ -17,24 +20,27 @@ public class MainActivity extends BaseNewActivity implements OnXListViewListener
 	NewsModel newsModel;
 	NewsListEntity newsListEntity;
 	XListView listView;
-	NewsListAdapter adapter;
+	GoodListAdapter adapter;
 	SocerModel socerModel;
 	SocerListEntity socerListEntity;
 	PostTmpModel pModel;
+	GoodModel goodModel;
 	int pageNumber = 1;
 	
 	
 	@Override
 	public void onRefresh() {
 		pageNumber = 1;
+		new GoodListHandler(context).execute();
 		// TODO Auto-generated method stub
-		new ListHandler(context,pageNumber).execute();
+//		new ListHandler(context,pageNumber).execute();
 //		new SocerListHandler(context).execute();
 	}
 
 	@Override
 	public void onLoadMore() {
-		new ListHandler(context,pageNumber).execute();
+		new GoodListHandler(context).execute();
+//		new ListHandler(context,pageNumber).execute();
 	}
 	
 	@Override
@@ -56,12 +62,13 @@ public class MainActivity extends BaseNewActivity implements OnXListViewListener
 	@Override
 	public void setModel() {
 		//实例化model，修改组件属性，判定控件，启动获取数据的线程
-		newsModel = new NewsModel(context);
-		socerModel = new SocerModel(context);
+//		newsModel = new NewsModel(context);
+//		socerModel = new SocerModel(context);
 		
-		adapter = new NewsListAdapter(context,newsModel.getList());
+//		adapter = new NewsListAdapter(context,newsModel.getList());
+		adapter = new GoodListAdapter(context);
 		listView.setAdapter(adapter);
-		pModel = new PostTmpModel(context);
+//		pModel = new PostTmpModel(context);
 		listView.refresh(this);
 	}
 
@@ -71,48 +78,92 @@ public class MainActivity extends BaseNewActivity implements OnXListViewListener
 		return true;
 	}
 	
-	class ListHandler extends HandlerHelp{
-		String page;
-
-		public ListHandler(Context context,int page) {
+	class GoodListHandler extends HandlerHelp{
+		GoodListEntity goodList;
+		public GoodListHandler(Context context) {
 			super(context);
-			this.page = Integer.toString(page);
+			goodModel = new GoodModel(context);
 		}
 
 		@Override
 		public void updateUI() {
 			listView.stopRefresh();
 			listView.stopLoadMore();
-			if(newsListEntity != null){
-				if(newsListEntity.getAlist() != null 
-						&& newsListEntity.getAlist().size() > 0){
+			if(goodList != null){
+				if(goodList.getList() != null 
+						&& goodList.getList().size() > 0){
 					if(pageNumber == 1){
-						adapter.setList(newsListEntity.getAlist());
+						adapter.setList(goodList.getList());
 					}else{
-						adapter.getList().addAll(newsListEntity.getAlist());
+						adapter.getList().addAll(goodList.getList());
 					}
 					pageNumber++;
 					adapter.notifyDataSetChanged();
-					if(newsListEntity.getPage().equals(newsListEntity.getTotalPage())){
-						listView.setPullLoadEnable(XListView.FOOTER_RETAIN);
-					}
 				}
 			}
 		}
 
 		@Override
 		public void doTask(Message msg) throws Exception {
-			newsListEntity = newsModel.RequestList(page);
-//			UploadModel model = new UploadModel(context);
-//			model.RequestUpload("a", "b");
+			goodList = goodModel.RequestGoodList(pageNumber);
 		}
 
 		@Override
 		public void doTaskAsNoNetWork(Message msg) throws Exception {
-			System.out.println("adfafda");
+			
 		}
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+//	class ListHandler extends HandlerHelp{
+//		String page;
+//
+//		public ListHandler(Context context,int page) {
+//			super(context);
+//			this.page = Integer.toString(page);
+//		}
+//
+//		@Override
+//		public void updateUI() {
+//			listView.stopRefresh();
+//			listView.stopLoadMore();
+//			if(newsListEntity != null){
+//				if(newsListEntity.getAlist() != null 
+//						&& newsListEntity.getAlist().size() > 0){
+//					if(pageNumber == 1){
+//						adapter.setList(newsListEntity.getAlist());
+//					}else{
+//						adapter.getList().addAll(newsListEntity.getAlist());
+//					}
+//					pageNumber++;
+//					adapter.notifyDataSetChanged();
+//					if(newsListEntity.getPage().equals(newsListEntity.getTotalPage())){
+//						listView.setPullLoadEnable(XListView.FOOTER_RETAIN);
+//					}
+//				}
+//			}
+//		}
+//
+//		@Override
+//		public void doTask(Message msg) throws Exception {
+//			newsListEntity = newsModel.RequestList(page);
+////			UploadModel model = new UploadModel(context);
+////			model.RequestUpload("a", "b");
+//		}
+//
+//		@Override
+//		public void doTaskAsNoNetWork(Message msg) throws Exception {
+//			System.out.println("adfafda");
+//		}
+//		
+//	}
 
 	
 
