@@ -1,20 +1,17 @@
 package net.yasite.test;
 
 import net.yasite.adapter.GoodListAdapter;
-import net.yasite.adapter.NewsListAdapter;
 import net.yasite.entity.GoodListEntity;
-import net.yasite.entity.NewsListEntity;
-import net.yasite.entity.SocerListEntity;
 import net.yasite.model.GoodModel;
-import net.yasite.model.NewsModel;
-import net.yasite.model.PostTmpModel;
-import net.yasite.model.SocerModel;
-import net.yasite.model.UploadModel;
 import net.yasite.net.HandlerHelp;
 import net.yasite.view.XListView;
 import net.yasite.view.XListView.OnXListViewListener;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Message;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivity extends BaseNewActivity implements OnXListViewListener{
 	XListView listView;
@@ -55,6 +52,18 @@ public class MainActivity extends BaseNewActivity implements OnXListViewListener
 		//实例化model，修改组件属性，判定控件，启动获取数据的线程
 		adapter = new GoodListAdapter(context);
 		listView.setAdapter(adapter);
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				if(position > 0){
+					Intent it = new Intent(context,GoodInfoActivity.class);
+					it.putExtra("id", adapter.getList().get(position - 1).getGoods_id());
+					startActivity(it);
+				}
+			}
+		});
 		listView.refresh(this);
 	}
 
