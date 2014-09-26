@@ -1,7 +1,5 @@
 package net.yasite.api;
 
-import java.net.URL;
-
 import net.yasite.api.params.BaseHttpParam;
 import net.yasite.api.params.GoodInfoParams;
 import net.yasite.api.params.Urls;
@@ -25,7 +23,7 @@ public class GoodInfoAPI extends BaseAPI {
 
 	@Override
 	public GoodEntity handlerResult(JSONObject json) throws JSONException {
+		// TODO Auto-generated method stub
 		return new Gson().fromJson(json.toString(), GoodEntity.class);
 	}
-
 }

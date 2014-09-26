@@ -22,4 +22,5 @@ public class GoodModel extends Model {
 	public GoodEntity RequestGoodInfo(String id){
 		return goodService.getGoodInfo(id);
 	}
+	
 }

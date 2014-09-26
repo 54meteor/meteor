@@ -1,20 +1,20 @@
 package net.yasite.test;
 
-import android.content.Context;
-import android.os.Message;
-import android.widget.ImageView;
-import android.widget.TextView;
 import net.yasite.entity.GoodEntity;
 import net.yasite.model.GoodModel;
 import net.yasite.net.HandlerHelp;
 import net.yasite.util.ActivityUtil;
+import android.content.Context;
+import android.os.Message;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class GoodInfoActivity extends BaseNewActivity {
-	String id;
 	ImageView thumb;
 	TextView name;
 	TextView market_price;
 	TextView shop_price;
+	String id;
 	GoodModel goodModel;
 	GoodEntity goodEntity;
 	@Override
@@ -27,6 +27,7 @@ public class GoodInfoActivity extends BaseNewActivity {
 
 	@Override
 	public void setContent() {
+		// TODO Auto-generated method stub
 		setContentView(R.layout.goods_item);
 	}
 
@@ -38,24 +39,25 @@ public class GoodInfoActivity extends BaseNewActivity {
 
 	@Override
 	public boolean getIntentValue() {
-		if(getIntent().getStringExtra("id") != null){
-			id = getIntent().getStringExtra("id");
+		id = getIntent().getStringExtra("id");
+		if(id != null && !id.equals("")){
 			return true;
 		}else{
-			ActivityUtil.showToast(context, "未找到商品信息");
+			ActivityUtil.showToast(context, "未找到商品");
 			return false;
 		}
 	}
-	
 	
 	class GoodInfoHandler extends HandlerHelp{
 
 		public GoodInfoHandler(Context context) {
 			super(context);
+			// TODO Auto-generated constructor stub
 		}
 
 		@Override
 		public void updateUI() {
+			// TODO Auto-generated method stub
 			if(goodEntity != null){
 				if(goodEntity.getGoods_name() != null){
 					name.setText(goodEntity.getGoods_name());
@@ -67,11 +69,15 @@ public class GoodInfoActivity extends BaseNewActivity {
 				}else{
 					market_price.setText("");
 				}
+				
+			}else{
+				ActivityUtil.showToast(context, "未找到商品");
 			}
 		}
 
 		@Override
 		public void doTask(Message msg) throws Exception {
+			// TODO Auto-generated method stub
 			goodEntity = goodModel.RequestGoodInfo(id);
 		}
 

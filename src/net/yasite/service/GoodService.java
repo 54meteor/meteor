@@ -44,5 +44,6 @@ public class GoodService extends BaseService {
 		}
 		return null;
 	}
+	
 
 }
