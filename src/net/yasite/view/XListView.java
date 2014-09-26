@@ -184,7 +184,6 @@ public class XListView extends ListView implements OnScrollListener
 	public void setPullLoadEnable(int enableState)
 	{
 		mPullLoadState = enableState;
-		System.out.println(mPullLoadState);
 		switch (mPullLoadState)
 		{
 		case FOOTER_SHOW:

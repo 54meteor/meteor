@@ -139,6 +139,8 @@ public abstract class BaseAPI implements HttpAPI {
 				json.put("list", new JSONArray(response.toString()));
 			}else if(response.toString().startsWith("<html>")){
 				json.put("content", response.toString());
+			}else if(response.toString().startsWith("<?xml")){
+				json.put("content", response.toString());
 			}else{
 				json = new JSONObject(response.toString());
 			}
