@@ -1,6 +1,7 @@
 package net.yasite.test;
 
 import net.yasite.adapter.GoodListAdapter;
+import net.yasite.adapter.TestAdapter;
 import net.yasite.entity.GoodListEntity;
 import net.yasite.model.GoodModel;
 import net.yasite.net.HandlerHelp;
@@ -15,7 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class MainActivity extends BaseNewActivity implements OnXListViewListener{
 	XListView listView;
-	GoodListAdapter adapter;
+	TestAdapter adapter;
 	GoodModel goodModel;
 	int pageNumber = 1;
 	
@@ -50,7 +51,7 @@ public class MainActivity extends BaseNewActivity implements OnXListViewListener
 	@Override
 	public void setModel() {
 		//实例化model，修改组件属性，判定控件，启动获取数据的线程
-		adapter = new GoodListAdapter(context);
+		adapter = new TestAdapter(context);
 		listView.setAdapter(adapter);
 		listView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -59,7 +60,7 @@ public class MainActivity extends BaseNewActivity implements OnXListViewListener
 					long arg3) {
 				if(position > 0){
 					Intent it = new Intent(context,GoodInfoActivity.class);
-					it.putExtra("id", adapter.getList().get(position - 1).getGoods_id());
+					it.putExtra("id", adapter.getItem(position - 1).getGoods_id());
 					startActivity(it);
 				}
 			}

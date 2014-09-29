@@ -2,7 +2,7 @@ package net.yasite.entity;
 
 import java.io.Serializable;
 
-public class GoodEntity implements Serializable {
+public class GoodEntity extends Object implements Serializable {
 	private String goods_id;
 	private String goods_sn;
 	private String goods_name;

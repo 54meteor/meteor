@@ -3,7 +3,7 @@ package net.yasite.api.params;
 public class Urls {
 
 	public final static String PROTOCOL = "http";
-	public final static String HOST = "172.17.68.244";
+	public final static String HOST = "192.168.253.17";
 	public final static String PORT = "80";
 	
 	public final static String WEB_SERVER_PATH = PROTOCOL + "://" + HOST + ":" + PORT;
