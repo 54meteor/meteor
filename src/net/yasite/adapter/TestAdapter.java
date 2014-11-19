@@ -16,7 +16,6 @@ public class TestAdapter extends YasiteAdapter {
 	public TestAdapter(Context context) {
 		super(context);
 		setImageLoader();
-		layoutId = R.layout.goods_item;
 	}
 	
 	public TestAdapter(Context context,List<NewsEntity> newsList) {
@@ -94,5 +93,11 @@ public class TestAdapter extends YasiteAdapter {
 	@Override
 	protected ViewHolder setHolder() {
 		return new ViewHolderTest();
+	}
+
+	@Override
+	protected void setLayoutResource() {
+		// TODO Auto-generated method stub
+		layoutId = R.layout.goods_item;
 	}
 }

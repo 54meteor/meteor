@@ -44,6 +44,7 @@ public abstract class YasiteAdapter extends BaseAdapter {
 		ViewHolder mViewHolder;
 		if(null == convertView){
 			mViewHolder = setHolder();
+			setLayoutResource();
 			convertView = LayoutInflater.from(context).inflate(layoutId, null);
 			this.setupChildViews(convertView, mViewHolder);
 			convertView.setTag(mViewHolder);
@@ -61,5 +62,7 @@ public abstract class YasiteAdapter extends BaseAdapter {
 	protected abstract class ViewHolder{};
 	
 	protected abstract ViewHolder setHolder();
+	
+	protected abstract void setLayoutResource();
 
 }
