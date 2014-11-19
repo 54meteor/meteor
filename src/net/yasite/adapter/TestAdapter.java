@@ -96,7 +96,7 @@ public class TestAdapter extends YasiteAdapter {
 	}
 
 	@Override
-	protected void setLayoutResource() {
+	protected void setLayoutResource(int position) {
 		// TODO Auto-generated method stub
 		layoutId = R.layout.goods_item;
 	}
